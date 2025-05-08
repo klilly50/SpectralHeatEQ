@@ -1,5 +1,6 @@
 %%
 N = 4;
+T = 1;
 
 % Forcing to be odd
 if ( mod(N+1, 2) )  
@@ -31,12 +32,17 @@ coF = Ops.coF;
 %% Initial Condition
 CFS = zeros(size(zz));
 f = @(r,z,th,t) r .* sin(th) + z .* cos(th);
-% finit = @(r,z,th,t) f(r,z,th,0);
+finit = @(r,z,th) f(r,z,th,0);
 
 
 for j=1:N
-    CFS(:,j,:) = f(rr(:,j,:),zz(:,j,:), tt(:,j,:));
+    CFS(:,j,:) = finit(rr(:,j,:),zz(:,j,:), tt(:,j,:));
 end
 
 disp("printing CFS:");
 disp(CFS);
+
+%% V2C
+%CFS = V2C_cyl(CFS,'rzt');
+% CFS(:,:,:,2:T)=zeros; % sets all T > 1 to be 0, when T=1 it does nothing
+%disp(CFS); % prints N many columns per every T
