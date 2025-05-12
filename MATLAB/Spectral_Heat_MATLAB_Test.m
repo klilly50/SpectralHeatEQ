@@ -44,7 +44,7 @@ disp(CFS);
 
 %% V2C
 
-% from chebfun
+% from trigtech and chebtech2
 CFS_func = V2C_cyl(CFS,'rzt');
 CFS(:,:,:,2:T)=zeros; % sets all T > 1 to be 0, when T=1 it does nothing
 disp('CFS_func: ');
