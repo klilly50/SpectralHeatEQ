@@ -32,7 +32,6 @@ for kk = 1:dim
     % Transform values according to order.
     if ( a(kk) == 't' || a(kk) == 'T' )
         vals = trigv2c(vals);
-        %trigv2c(vals);
     elseif ( a(kk) == '0' )
     else
         vals = cheb2vec(vals); % run for equiv matlab code version
