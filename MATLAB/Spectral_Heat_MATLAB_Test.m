@@ -43,21 +43,29 @@ disp("printing CFS:");
 disp(CFS);
 
 %% V2C
-%CFS = V2C_cyl(CFS,'rzt');
-% CFS(:,:,:,2:T)=zeros; % sets all T > 1 to be 0, when T=1 it does nothing
-%disp(CFS); % prints N many columns per every T
 
+% from chebfun
+CFS_func = V2C_cyl(CFS,'rzt');
+CFS(:,:,:,2:T)=zeros; % sets all T > 1 to be 0, when T=1 it does nothing
+disp('CFS_func: ');
+disp(CFS_func); % prints N many columns per every T
+
+% written explicitly
+CFS_expl = V2C_cyl_manual(CFS,'rzt');
+CFS(:,:,:,2:T)=zeros;
+disp('CFS_expl: ');
+disp(CFS_expl .* -1);
 
 %% Testing Trigtech Function
 
 vals = pi* linspace(-1, 1, N);
+disp('vals:');
+disp(vals);
 
 % this is the chebfun function!
-
 ttfunc = trigtech.vals2coeffs(vals);
 
 % this is the explicit equation!
-
 function c = vals2coeffs(vals)
     n = length(vals);               % Number of sample points
     c = fftshift(fft(vals))/n;       % Compute FFT and normalize
@@ -65,5 +73,11 @@ end
 
 
 ttexpl = vals2coeffs(vals);
+
+disp('ttfunc:');
+disp(ttfunc);
+
+disp('ttexpl:');
+disp(ttexpl);
 
 
