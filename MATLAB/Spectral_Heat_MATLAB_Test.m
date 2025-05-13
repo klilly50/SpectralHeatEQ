@@ -56,6 +56,19 @@ CFS(:,:,:,2:T)=zeros;
 disp('CFS_expl: ');
 disp(CFS_expl .* -1);
 
+%% Comparing
+vals_cheb = [-1; -0.5; 0; 0.5; 1];
+display(vals_cheb)
+vals_cheb_updated = chebv2c(vals_cheb);
+disp("vals updated")
+display(vals_cheb_updated)
+
+vals_trig = [-1, -0.5i, 0, 0.5i, 1; -1i, -0.5, 0, 0.5, 1i; -1, -0.5, 0i, 0.5, 1];
+display(vals_trig);
+vals_updated = trigv2c(vals_trig);
+disp("vals updated")
+display(vals_updated);
+
 %% Testing Trigtech Function
 
 vals = pi* linspace(-1, 1, N);
