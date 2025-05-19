@@ -34,13 +34,19 @@ for kk = 1:dim
         vals = trigv2c(vals);
     elseif ( a(kk) == '0' )
     else
-        vals = chebv2c(vals); % run for equiv matlab code version
+        vals = chebv2c(vals);
     end
     
     if ( dim ~= 1 ) % It thinks 1D arrays are 2D, so "permute" causes problems
-        vals = reshape(vals,circshift(SIZE,dim-kk+1,2));
-        vals = permute(vals,circshift(1:dim,dim-1,2));
+        vals = reshape(vals, [5 5 5]);
+        vals = permute(vals, [2 3 1]);
     end
+
+    if (a(kk) == 'r' || a(kk) == 'z')
+        vals(:,:,2) = -vals(:,:,2);
+        vals(:,:,4) = -vals(:,:,4);
+    end
+
 end
 
 end

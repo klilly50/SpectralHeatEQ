@@ -42,19 +42,23 @@ end
 disp("printing CFS:");
 disp(CFS);
 
-%% V2C
-
-% from trigtech and chebtech2
+%% V2C ORIGINAL
+disp('FUNCTION')
 CFS_func = V2C_cyl(CFS,'rzt');
 CFS(:,:,:,2:T)=zeros; % sets all T > 1 to be 0, when T=1 it does nothing
-disp('CFS_func: ');
-disp(CFS_func); % prints N many columns per every T
 
-% written explicitly
+disp('CFS_func: ');
+disp(CFS_func);
+% disp(CFS_func); % prints N many columns per every T
+
+%% V2C EXPLICILY WRITTEN
+disp('EXPLICIT')
 CFS_expl = V2C_cyl_manual(CFS,'rzt');
 CFS(:,:,:,2:T)=zeros;
+
 disp('CFS_expl: ');
-disp(CFS_expl .* -1);
+disp(CFS_expl);
+% disp(CFS_expl .* -1);
 
 %% Comparing
 vals_cheb = [-1; -0.5; 0; 0.5; 1];

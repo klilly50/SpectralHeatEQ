@@ -36,7 +36,7 @@ n = size(values, 1);
 % Trivial case (constant or empty):
 if ( n <= 1 )
     coeffs = values; 
-    disp('trivial case reached');
+    % disp('trivial case reached');
     return
 end
 
@@ -47,13 +47,13 @@ isSkew = max(abs(vals+conj(vals(end:-1:1, :))),[],1) == 0;
 
 % compute coefficients
 coeffs = (1/n)*fftshift(fft(values, [], 1), 1);
-disp(size(coeffs));
+% disp(size(coeffs));
 
 % correct if symmetric
 coeffs(:,isHerm) = real(coeffs(:,isHerm));
 coeffs(:,isSkew) = 1i*imag(coeffs(:,isSkew));
-disp('coeffs below');
-disp(coeffs);
+% disp('coeffs below');
+% disp(coeffs);
 
 % These coefficients are for interpolation defined on [0,2*pi), but we want
 % to work on [-pi,pi). To fix the coefficients for this we just need to
@@ -64,8 +64,8 @@ if ( mod(n, 2) )
 else
     even_odd_fix = (-1).^((-n/2):(n/2-1)).';
 end
-disp(size(even_odd_fix));
-disp(even_odd_fix);
+% disp(size(even_odd_fix));
+% disp(even_odd_fix);
 
 coeffs = bsxfun(@times, coeffs, even_odd_fix);
 
