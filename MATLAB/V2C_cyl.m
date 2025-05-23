@@ -42,8 +42,8 @@ for kk = 1:dim
         vals = permute(vals,circshift(1:dim,dim-1,2));
     end
     
-    fprintf('dimension %s\n', a(kk));
-    disp(vals);
+    % fprintf('dimension %s\n', a(kk));
+    % disp(vals);
 
 end
 

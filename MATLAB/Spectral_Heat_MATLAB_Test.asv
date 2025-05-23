@@ -133,7 +133,7 @@ for d = 5:T
     CFS(:,:,:,d) = Heat3DSolver(RHS,q,N,C02,A,D2,coF);
 end
 
-disp(CFS);
+% disp(CFS);
 
 % Convert back to value space
 % CFS(:,:,:,T) = C2V_cyl(CFS(:,:,:,T),'rzt');
@@ -196,6 +196,13 @@ function [C1, E] = zeroDOF(C1, C2, E, B, G)
             if ( abs(C1(kk,ii)) > 10*eps )
                 c = C1(kk, ii); % Constant required to zero entry out.
                 C1(kk,:) = C1(kk,:) - c*B(ii,:);
+                if (kk == 1 & ii == 1)
+                    disp(size(G(ii,:)))
+                    disp(size(G(ii,:)))
+
+                    disp(size(E(kk,:)))
+                    disp(E(kk,:))
+                end
                 E(kk,:) = E(kk,:) - c*G(ii,:)*C2.';
             end
         end
