@@ -30,6 +30,9 @@ function values = chebc2v(coeffs)
 
 % Get the length of the input:
 n = size(coeffs, 1);
+disp('size and coeffs');
+disp(size(coeffs));
+disp(coeffs);
 
 % Trivial case (constant or empty):
 if ( n <= 1 )
@@ -40,6 +43,9 @@ end
 % Check for symmetry
 isEven = max(abs(coeffs(2:2:end,:)),[],1) == 0;
 isOdd = max(abs(coeffs(1:2:end,:)),[],1) == 0;
+disp('even and odd')
+disp(isEven)
+disp(isOdd)
 
 % Scale them by 1/2:
 coeffs(2:n-1,:) = coeffs(2:n-1,:)/2;

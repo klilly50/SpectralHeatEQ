@@ -135,9 +135,6 @@ end
 
 disp(CFS);
 
-% Convert back to value space
-% CFS(:,:,:,T) = C2V_cyl(CFS(:,:,:,T),'rzt');
-
 %% Screened Poisson Solver
 
 function Fapprox = Heat3DSolver(cfs,Q,N,C02,A,D2,coF)
@@ -203,8 +200,14 @@ function [C1, E] = zeroDOF(C1, C2, E, B, G)
 
 end
 
-%% 
+%% C2V original
+CFS_func = CFS;
+CFS_func(:,:,:,T) = C2V_cyl(CFS_func(:,:,:,T),'rzt');
+disp("ORIGINAL");
+disp(CFS_func);
 
-
-
-
+%% C2V manual
+CFS_expl = CFS;
+CFS_expl(:,:,:,T) = C2V_cyl_manual(CFS_expl(:,:,:,T),'rzt');
+disp("MANUAL");
+disp(CFS_expl);
