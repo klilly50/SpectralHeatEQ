@@ -86,10 +86,6 @@ function V2C_cyl(vals, a)
                 vals[:, :, j] .= -vals[:, :, j]
             end
         end
-        
-        # println("CFS after transformation on dimension ", a[kk])
-        # pretty_print_array_matlab_style(vals)
-        
     end
 
     return vals
@@ -172,7 +168,6 @@ end
 ##  chebtech2.coeffs2vals function
 
 function chebc2v(coeffs)
-    println(size(coeffs))
     n = size(coeffs)[1]
 
     # Trivial case (constant or empty)
@@ -186,9 +181,6 @@ function chebc2v(coeffs)
     # check if all odd-indexed (AKA even Chebyshev coefficients T2, T4,...) are zero
     isOdd  = [maximum(abs.(coeffs[1:2:end, :])) == 0]
     # isEven and isOdd are arrays of booleans telling whether the column in coeffs is even or odd symmetric
-    # println("even and odd")
-    # println(isEven)
-    # println(isOdd)
 
     # Scale them by 1/2
     coeffs = copy(coeffs)  # avoid mutating input
@@ -198,8 +190,6 @@ function chebc2v(coeffs)
     tmp = vcat(coeffs, coeffs[n-1:-1:2, :])
 
     # Do FFT dependent on realness
-    println("COEFFS: ")
-    println(coeffs)
     if isreal(coeffs)
         values = real.(fft(tmp))
     elseif isreal(1im .* coeffs)
@@ -210,10 +200,6 @@ function chebc2v(coeffs)
 
     # flip and truncate
     values = values[n:-1:1, :]
-    # println("size and values")
-    # println(size(values))
-    # println(values)
-
     # enforce symmetry
     values[:, isEven] = (values[:, isEven] .+ reverse(values[:, isEven])) ./ 2
     values[:, isOdd] = (values[:, isOdd] .- reverse(values[:, isOdd])) ./ 2
@@ -283,11 +269,7 @@ function C2V_cyl(vals, a)
         if dim != 1
             vals = reshape(vals, SIZE)
             vals = permutedims(vals, (2, 3, 1))
-        end
-        
-        println("CFS after transformation on dimension ", a[kk])
-        pretty_print_3Darray_matlab_style(vals)
-        
+        end 
     end
 
     vals = real(vals)

@@ -1,6 +1,8 @@
 
 
-## Final Function! 
+## Final Function!
+
+using LinearAlgebra, SparseArrays
 
 function exactsln(f,N,T,alph)
 
@@ -44,8 +46,6 @@ function exactsln(f,N,T,alph)
 
 
     ## Matrices ##
-
-    using LinearAlgebra, SparseArrays
 
     # C01: Convert Chebyshev-T (T) coefficients to Chebyshev-U (U)
     C01 = spdiagm(0 => 0.5*ones(N), 2 => -0.5*ones(N-2))
