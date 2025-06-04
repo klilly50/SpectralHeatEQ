@@ -284,7 +284,8 @@ function ndgrid(arrays::AbstractVector...)
     grids = ntuple(d -> begin
         shape = ones(Int, length(arrays))
         shape[d] = sizes[d]
-        reshape(arrays[d], shape...) |> a -> repeat(a, sizes ./ shape)
+        reshaped = reshape(arrays[d], shape...)
+        repeat(reshaped, sizes .÷ shape...)
     end, length(arrays))
     return grids
 end
@@ -296,7 +297,6 @@ function func2grid(f, N, ord, coeff)
     # recreate trigpts and chebpts 
 
     t = pi* range(-1,1, length=N+1)[1:end-1];
-    t = reshape(t,:,1)
 
     r = [cos((pi*k)/(N-1)) for k in (N-1):-1:0];
 
@@ -324,9 +324,7 @@ function func2grid(f, N, ord, coeff)
     GRID = ndgrid(grid...)
     X = f(GRID...)
 
-    return
-
-    X
+    return X
 
 end
 
